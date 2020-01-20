@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>-->
+    </head>
+    <body class="text-center">
+        <h1 style="    margin: 40px 0 20px 0;">URL Shortener Service</h1>
+        <form action="/" method="post" class="form-inline" style="max-width: 400px; margin: 0 auto;">
+            <div class="form-group mr-2">
+                <label class="sr-only" for="url">Long URL</label>
+                <?=str_replace('type="text"', 'type="url"', $form->render('url')); ?>
+            </div>
+            <?=$form->render('csrf'); ?>
+            <button type="submit" class="btn btn-primary">Get Short URL</button>
+        </form>
+
+    <?php if (isset($message) && $message) { ?>
+        <div class="alert alert-danger bs-alert-old-docs" style="max-width: 400px; margin: 20px auto 0 auto;">
+            <strong>Error!</strong> <?=$message?>
+        </div>
+    <?php } else if (isset($shortened)) { ?>
+        <div class="alert alert-success bs-alert-old-docs" style="max-width: 400px; margin: 20px auto 0 auto;">
+            <strong>Heads up!</strong> This link <a href="<?=$url?>" target="_blank"><?=$url?></a> has been shortened to &rarr; <a href="<?=$shortened?>" target="_blank"><?=$shortened?></a>
+        </div>
+    <?php } ?>
+
+    </body>
+</html>
